@@ -1,0 +1,46 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 30
+    }
+
+    // Include your AAR files as artifacts
+    publishNonDefault true
+}
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId = 'com.github.phuongwd'
+            artifactId = 'exoplayer-core'
+            version = '2.10.1'
+
+            artifact('exoplayer-core-2.10.1.aar') // Path to the AAR file
+        }
+        aarDash(MavenPublication) {
+            groupId = 'com.github.phuongwd'
+            artifactId = 'exoplayer-dash'
+            version = '2.10.1'
+
+            artifact('exoplayer-dash-2.10.1.aar')
+        }
+        aarHls(MavenPublication) {
+            groupId = 'com.github.phuongwd'
+            artifactId = 'exoplayer-hls'
+            version = '2.10.1'
+
+            artifact('exoplayer-hls-2.10.1.aar')
+        }
+        aarSmoothstreaming(MavenPublication) {
+            groupId = 'com.github.phuongwd'
+            artifactId = 'exoplayer-smoothstreaming'
+            version = '2.10.1'
+
+            artifact('exoplayer-smoothstreaming-2.10.1.aar')
+        }
+    }
+}
