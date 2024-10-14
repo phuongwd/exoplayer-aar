@@ -1,34 +1,53 @@
-apply plugin: 'maven-publish'
+plugins {
+    id 'com.android.library'  // Apply the Android Library plugin
+    id 'maven-publish'
+}
+
+android {
+    compileSdkVersion 30  // Set to your desired SDK version
+
+    defaultConfig {
+        minSdkVersion 16  // Minimum SDK version your library supports
+        targetSdkVersion 30  // Target SDK version
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
 
 publishing {
     publications {
-        aar(MavenPublication) {
+        aarCore(MavenPublication) {
             groupId = 'com.github.phuongwd'
             artifactId = 'exoplayer-core'
             version = '2.10.1'
-
             artifact('exoplayer-core-2.10.1.aar')
         }
         aarDash(MavenPublication) {
             groupId = 'com.github.phuongwd'
             artifactId = 'exoplayer-dash'
             version = '2.10.1'
-
             artifact('exoplayer-dash-2.10.1.aar')
         }
         aarHls(MavenPublication) {
             groupId = 'com.github.phuongwd'
             artifactId = 'exoplayer-hls'
             version = '2.10.1'
-
             artifact('exoplayer-hls-2.10.1.aar')
         }
-        aarSmoothstreaming(MavenPublication) {
+        aarSmoothStreaming(MavenPublication) {
             groupId = 'com.github.phuongwd'
             artifactId = 'exoplayer-smoothstreaming'
             version = '2.10.1'
-
             artifact('exoplayer-smoothstreaming-2.10.1.aar')
         }
+    }
+
+    repositories {
+        mavenLocal()  // For local testing if needed
     }
 }
