@@ -1,1 +1,8 @@
+pluginManagement {
+    repositories {
+        google() // Needed to resolve Android dependencies
+        mavenCentral() // Replace jcenter() with mavenCentral()
+    }
+}
+
 rootProject.name = "exoplayer-aar"

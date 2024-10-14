@@ -1,5 +1,16 @@
-apply plugin: 'maven-publish'
+// Ensure you have the Android plugin
+buildscript {
+    repositories {
+        google()  // Google's repository to find the Android Gradle Plugin
+        mavenCentral() // JCenter is deprecated, so use mavenCentral instead
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.0' // Use the appropriate Gradle version
+    }
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 30
@@ -8,8 +19,12 @@ android {
         targetSdkVersion 30
     }
 
-    // Include your AAR files as artifacts
-    publishNonDefault true
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 publishing {
@@ -19,7 +34,7 @@ publishing {
             artifactId = 'exoplayer-core'
             version = '2.10.1'
 
-            artifact('exoplayer-core-2.10.1.aar') // Path to the AAR file
+            artifact('exoplayer-core-2.10.1.aar')
         }
         aarDash(MavenPublication) {
             groupId = 'com.github.phuongwd'
